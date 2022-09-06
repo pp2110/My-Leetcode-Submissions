@@ -11,12 +11,12 @@
  */
 class Solution {
 public:
-    bool helper(TreeNode * &root,TreeNode *temp){
+    bool helper(TreeNode * &root){
         if(root == nullptr)
             return 0;
-        bool l = helper(root->left,temp);
-        bool r = helper(root->right,temp);
-       // cout<<root->val<<" ";
+        bool l = helper(root->left);
+        bool r = helper(root->right);
+      
         if(l==0){
           root->left = nullptr;
         }
@@ -37,8 +37,8 @@ public:
         
     }
     TreeNode* pruneTree(TreeNode* root) {
-        TreeNode *temp=root;
-        helper(root,temp);
+        
+        helper(root);
         
         return root;
     }
