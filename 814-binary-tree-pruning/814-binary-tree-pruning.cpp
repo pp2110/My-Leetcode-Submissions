@@ -12,24 +12,14 @@
 class Solution {
 public:
     bool helper(TreeNode * &root){
-        if(root == nullptr)
-            return 0;
-        bool l = helper(root->left);
-        bool r = helper(root->right);
-      
-        if(l==0){
-          root->left = nullptr;
-        }
+        if(!root) return 0;
         
+        if(!helper(root->left))  root->left = nullptr;
         
-        if(r==0){
-            root->right = nullptr;
-        }
+        if(!helper(root->right))  root->right = nullptr;
         
-        
-        if(root->val == 1 or l or r )
+        if(root->val or helper(root->left) or helper(root->right) )
             return true;
-        
         
         root=nullptr;
         return false;
