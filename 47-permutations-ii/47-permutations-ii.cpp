@@ -1,36 +1,31 @@
 class Solution {
 public:
-    void helper(vector<int> &ds, set<vector<int>> &ans, vector<bool> &visited, vector<int> &nums){
-        if(ds.size() == nums.size()){
-            ans.insert(ds);
+    void helper(int ind, vector<int> &nums, vector<vector<int>> &ans){
+        if(ind  == nums.size()){
+            ans.push_back(nums);
             return;
         }
         
-        for(int i=0; i<nums.size(); i++){
-            if(!visited[i]){
-                ds.push_back(nums[i]);
-                visited[i] = true;
-                
-                helper(ds, ans, visited, nums);
-                
-                visited[i] = false;
-                
-                ds.pop_back();
-            }
+        unordered_set<int> st;
+        for(int i=ind; i<nums.size(); i++){
+            if(st.count(nums[i]) == 1)
+                continue;
+            
+            st.insert(nums[i]);
+            
+            swap(nums[ind], nums[i]);
+            
+            helper(ind+1, nums, ans);
+            
+            swap(nums[ind], nums[i]);
         }
     }
     
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        set<vector<int>> ans;
-        vector<vector<int>> ans1;
-        vector<int> ds;
-        vector<bool> visited(nums.size(), false);
+        vector<vector<int>> ans;
         
-        helper(ds, ans, visited, nums);
+        helper(0, nums, ans);
         
-        for(auto iter : ans){
-            ans1.push_back(iter);
-        }
-        return ans1;
+        return ans;
     }
 };
