@@ -16,20 +16,26 @@ public:
     void help(TreeNode *root,int sum,vector<int> &v){
         
         if(root==nullptr) return;
+        
         if(root->left==nullptr and root->right==nullptr){
+            
             if(sum==root->val){
                 v.push_back(root->val);
                 ans.push_back(v);
                 v.pop_back();
             }
+        
             return;
         }
         
         v.push_back(root->val);
         help(root->left,sum-root->val,v);
+        
         v.pop_back();
+        
         v.push_back(root->val);
         help(root->right,sum-root->val,v);
+        
         v.pop_back();
     }
     
