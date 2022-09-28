@@ -21,11 +21,6 @@ public:
         ListNode *slow = head, *fast = head;
         
         ListNode *curr = head;
-        int size = 0;
-        while(curr != nullptr){
-            curr = curr->next;
-            size++;
-        }
         
         int i=0;
         while(fast!=nullptr and fast->next!=nullptr){
