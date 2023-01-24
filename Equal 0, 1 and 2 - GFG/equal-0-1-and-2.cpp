@@ -16,35 +16,32 @@ class Solution {
         int count2 = 0;
         int delta10 = count1 - count0;
         int delta21 = count2 - count1;
-        string key = to_string(delta10) + "#" + to_string(delta21);
         int ans = 0;
-        
+        string key = to_string(delta10)+"#"+to_string(delta21);
         unordered_map<string, int> mp;
-        mp.emplace(key, 1);
+        mp[key]++;
         for(int i=0; i<n; i++){
-            if(str[i] == '0')   
+            if(str[i] == '0')
                 count0++;
             else if(str[i] == '1')
                 count1++;
             else
                 count2++;
-                
+             
             delta10 = count1 - count0;
             delta21 = count2 - count1;
             
-            key = to_string(delta10) + "#" + to_string(delta21);
+            key = to_string(delta10)+"#"+to_string(delta21);
             
             if(mp.find(key) != mp.end()){
                 ans += mp[key];
-                mp[key]++;
             }
-            else{
-                mp[key]++;
-            }
+            
+            mp[key]++;
+            
         }
         
         return ans;
-        
     }
 };
 
