@@ -24,15 +24,15 @@ public:
         
         priority_queue<int, vector<int>, greater<int>> pq;
         
-        // for(int i=0; i<sums.size(); i++)
-        //     cout<<sums[i]<<" ";
-        for(int i=0; i<sums.size(); i++){
-            pq.push(sums[i]);
-            if(pq.size() == k+1)
-                pq.pop();
-        }
+        sort(sums.begin(), sums.end());
+        reverse(sums.begin(), sums.end());
+        // for(int i=0; i<sums.size(); i++){
+        //     pq.push(sums[i]);
+        //     if(pq.size() == k+1)
+        //         pq.pop();
+        // }
         
-        return pq.top();
+         return sums[k - 1];
     }
 };
 
