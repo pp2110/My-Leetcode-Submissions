@@ -105,47 +105,34 @@ class Solution
     vector<int> topView(Node *root)
     {
         //Your code here
-        vector<vector<int>> ans;
-        vector<int> ans1;
-        if(root == nullptr) return ans1;
+        vector<int> ans;
+        queue<pair<Node *, int>> q;
+        map<int, int> mp;
         
-        map<int, map<int, multiset<int>>> nodes;
+        q.push({root, 0});
         
-        queue<pair<Node *, pair<int, int>>> q;
-        q.push({root, {0, 0}});
-        while(q.empty() == false){
-            auto p = q.front();
+        while(!q.empty()){
+            Node *topNode = q.front().first;
+            int line = q.front().second;
+            
             q.pop();
             
-            Node *node = p.first;
-            int x = p.second.first;
-            int y = p.second.second;
-            
-            nodes[x][y].insert(node->data);
-            if(node->left != nullptr){
-                q.push({node->left, {x-1, y+1}});
+            if(mp.find(line) == mp.end()){
+                mp[line] = topNode->data;
             }
             
-            if(node->right != nullptr){
-                q.push({node->right, {x+1, y+1}});
-            }
+            if(topNode->left)
+                q.push({topNode->left, line-1});
+                
+            if(topNode->right)
+                q.push({topNode->right, line+1});
         }
         
-        for(auto p : nodes){
-            vector<int> cols;
-            for(auto q : p.second){
-                cols.insert(cols.end(), q.second.begin(), q.second.end());
-            }
-            
-            ans.push_back(cols);
+        for(auto uiter : mp){
+            ans.push_back(uiter.second);
         }
         
-        
-        for(auto iter : ans){
-            ans1.push_back(iter[0]);
-        }
-        
-        return ans1;
+        return ans;
     }
 
 };
