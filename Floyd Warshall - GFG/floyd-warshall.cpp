@@ -13,32 +13,34 @@ class Solution {
 	    // Code here
 	    int n = matrix.size();
 	    
-	    for(int i=0; i<n; i++){
-	        for(int j=0; j<n; j++){
-	            if(matrix[i][j] == -1)
-	                matrix[i][j] = 1e9;
-	            
+	    vector<vector<int>> dp(n, vector<int>(n,1e9));
+	    for(int i = 0; i<n; i++){
+	        for(int j = 0; j<n; j++){
 	            if(i == j)
-	                matrix[i][j] = 0;
+	                dp[i][j] = 0;
+	           else if(matrix[i][j] != -1)
+	            dp[i][j] = matrix[i][j];
 	        }
 	    }
 	    
-	    for(int k=0; k<n; k++){
-	        for(int i=0; i<n; i++){
-	            for(int j=0; j<n; j++){
-	                matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+	    
+	    
+	    
+	        for(int j = 0; j<n; j++){
+	            for(int i = 0; i<n; i++){
+	                for(int k = 0; k<n; k++){
+	                dp[i][k] = min(dp[i][k], dp[i][j] + dp[j][k]);
 	            }
 	        }
 	    }
 	    
-	    for(int i=0; i<n; i++){
-	        for(int j=0; j<n; j++){
+	    
+	    matrix = dp;
+	    
+	    for(int i = 0; i<n; i++){
+	        for(int j = 0; j<n; j++)
 	            if(matrix[i][j] == 1e9)
 	                matrix[i][j] = -1;
-	            
-	            if(i == j)
-	                matrix[i][j] = 0;
-	        }
 	    }
 	}
 };
