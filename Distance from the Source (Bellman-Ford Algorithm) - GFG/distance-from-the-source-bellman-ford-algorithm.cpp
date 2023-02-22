@@ -23,9 +23,9 @@ class Solution {
                 int v = iter[1];
                 int wt = iter[2];
                 
-                if(dist[u]!= 1e8 and dist[u] + wt < dist[v]){
+                if(dist[u] != 1e9 and dist[u] + wt < dist[v]){
                     dist[v] = dist[u] + wt;
-                } 
+                }
             }
         }
         
@@ -34,9 +34,9 @@ class Solution {
                 int v = iter[1];
                 int wt = iter[2];
                 
-                if(dist[u]!= 1e8 and dist[u] + wt < dist[v]){
+                if(dist[u] != 1e9 and dist[u] + wt < dist[v]){
                     return {-1};
-                } 
+                }
         }
         
         return dist;
